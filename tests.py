@@ -19,7 +19,7 @@ value = row.text
 assert value == "οὗτος ἦν ἐν ἀρχῇ πρὸς τὸν θεόν."
 
 # get text fragment from ref with character offsets
-text = nt_001.frag(bcv_id=Ref("640101#13-#17"))
+text = nt_001.frag(bcv_ref=Ref("640101#13-#17"))
 
 assert text == "λόγος"
 
@@ -29,7 +29,7 @@ nt_002 = One(EXAMPLES / "nt_002.tsv")
 assert nt_002.get(token_id="49063").text == "ἀρχῇ"
 
 # get a list of rows by ref range
-rows = nt_002.rows(token_id=Ref("49079-49085"))
+rows = nt_002.rows(token_ref=Ref("49079-49085"))
 
 assert " ".join(row.text for row in rows) == nt_001.get(bcv_id="640102").text
 

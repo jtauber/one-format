@@ -54,7 +54,8 @@ class One:
     def rows(self, **kwargs):
         assert len(kwargs) == 1  # for now
         col_name, value = list(kwargs.items())[0]
-        assert col_name.endswith("_id")  # for now
+        assert col_name.endswith("_ref")  # for now
+        col_name = col_name[:-4] + "_id"
         assert isinstance(value, Ref)
         if "-" in value.raw:
             start = self.index[col_name][value.start]
@@ -66,7 +67,8 @@ class One:
     def frag(self, field="text", **kwargs):
         assert len(kwargs) == 1  # for now
         col_name, value = list(kwargs.items())[0]
-        assert col_name.endswith("_id")  # for now
+        assert col_name.endswith("_ref")  # for now
+        col_name = col_name[:-4] + "_id"
         assert isinstance(value, Ref)
         # can currently only handle foo#bar-#baz
         assert value.raw.count("-")
