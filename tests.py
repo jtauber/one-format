@@ -29,9 +29,9 @@ assert nt_004.get(token_id="49078").lemma == "λόγος"
 
 nt_005 = One(EXAMPLES / "nt_005.tsv")
 
-assert nt_005.get(token_id="49063").bcv_ref == "640101#3-#6"
+assert nt_005.get(token_id="49063").bcv_ref.raw == "640101#3-#6"
 
 
 nt_006 = One(EXAMPLES / "nt_006.tsv")
 
-assert nt_006.get(bcv_id="640102").token_ref == "49078-49085"
+assert nt_006.get(bcv_id="640102").token_ref.raw == "49078-49085"

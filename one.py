@@ -1,5 +1,18 @@
 from collections import defaultdict, namedtuple
 
+
+class Ref:
+    def __init__(self, value):
+        self.raw = value
+
+
+def wrap(col_name, value):
+    if col_name.endswith("_ref"):
+        return Ref(value)
+    else:
+        return value
+
+
 class One:
     def __init__(self, file_path):
         self.file_path = file_path
@@ -12,7 +25,11 @@ class One:
         self.data = []
         self.index = defaultdict(dict)
         for row_num, line in enumerate(lines[1:]):
-            row = Row(*line.rstrip("\n").split("\t"))
+            row = Row(*[
+                wrap(col_name, value)
+                for (col_name, value)
+                in zip(self.header, line.rstrip("\n").split("\t"))
+            ])
             self.data.append(row)
             for col_num, col_name in enumerate(self.header):
                 if col_name.endswith("_id"):
