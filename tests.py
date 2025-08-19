@@ -12,8 +12,11 @@ nt_001 = One(EXAMPLES / "nt_001.tsv")
 
 # get a row by id
 row = nt_001.get(bcv_id="640102")
+
 # get the value of a field on the row
-assert row.text == "οὗτος ἦν ἐν ἀρχῇ πρὸς τὸν θεόν."
+value = row.text
+
+assert value == "οὗτος ἦν ἐν ἀρχῇ πρὸς τὸν θεόν."
 
 
 nt_002 = One(EXAMPLES / "nt_002.tsv")
@@ -22,6 +25,7 @@ assert nt_002.get(token_id="49063").text == "ἀρχῇ"
 
 # get a list of rows by ref range
 rows = nt_002.rows(token_id=Ref("49079-49085"))
+
 assert " ".join(row.text for row in rows) == nt_001.get(bcv_id="640102").text
 
 
