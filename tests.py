@@ -17,9 +17,10 @@ nt_002 = One(EXAMPLES / "nt_002.tsv")
 
 assert nt_002.get(token_id="49063").text == "ἀρχῇ"
 
-assert " ".join(
-    row.text for row in nt_002.rows(token_id=Ref("49079-49085"))
-) == nt_001.get(bcv_id="640102").text
+assert (
+    " ".join(row.text for row in nt_002.rows(token_id=Ref("49079-49085")))
+    == nt_001.get(bcv_id="640102").text
+)
 
 
 nt_003 = One(EXAMPLES / "nt_003.tsv")

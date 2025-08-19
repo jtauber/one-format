@@ -6,7 +6,7 @@ class Ref:
         self.raw = value
         if "-" in value:
             self.start, self.end = value.split("-")
-    
+
     def __eq__(self, other):
         if isinstance(other, Ref):
             return self.raw == other.raw
@@ -32,11 +32,14 @@ class One:
         self.data = []
         self.index = defaultdict(dict)
         for row_num, line in enumerate(lines[1:]):
-            row = Row(*[
-                wrap(col_name, value)
-                for (col_name, value)
-                in zip(self.header, line.rstrip("\n").split("\t"))
-            ])
+            row = Row(
+                *[
+                    wrap(col_name, value)
+                    for (col_name, value) in zip(
+                        self.header, line.rstrip("\n").split("\t")
+                    )
+                ]
+            )
             self.data.append(row)
             for col_num, col_name in enumerate(self.header):
                 if col_name.endswith("_id"):
@@ -56,6 +59,6 @@ class One:
         if "-" in value.raw:
             start = self.index[col_name][value.start]
             end = self.index[col_name][value.end]
-            return self.data[start:end + 1]
+            return self.data[start : end + 1]
         else:
             return [self.data[self.index[col_name][value.raw]]]
