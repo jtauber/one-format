@@ -1,0 +1,14 @@
+[project]
+name = "one-format"
+version = "0.1.0"
+description = "a unified format for textual data"
+readme = "README.md"
+requires-python = ">=3.12"
+
+[dependency-groups]
+dev = [
+    "pytest>=8.4.1",
+]
+
+[tool.pytest.ini_options]
+pythonpath = "src"
