@@ -39,3 +39,5 @@ assert nt_005.get(token_id="49063").bcv_ref.raw == "640101#3-#6"
 nt_006 = One(EXAMPLES / "nt_006.tsv")
 
 assert nt_006.get(bcv_id="640102").token_ref.raw == "49079-49085"
+
+assert Ref("49079-49085") == Ref("49079-49085")

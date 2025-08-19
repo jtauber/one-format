@@ -7,6 +7,10 @@ class Ref:
         if "-" in value:
             self.start, self.end = value.split("-")
     
+    def __eq__(self, other):
+        if isinstance(other, Ref):
+            return self.raw == other.raw
+        return False
 
 
 def wrap(col_name, value):
