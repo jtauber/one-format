@@ -62,3 +62,17 @@ class One:
             return self.data[start : end + 1]
         else:
             return [self.data[self.index[col_name][value.raw]]]
+
+    def frag(self, field="text", **kwargs):
+        assert len(kwargs) == 1  # for now
+        col_name, value = list(kwargs.items())[0]
+        assert col_name.endswith("_id")  # for now
+        assert isinstance(value, Ref)
+        # can currently only handle foo#bar-#baz
+        assert value.raw.count("-")
+        assert value.raw.count("#") == 2
+        block_ref = value.start.split("#")[0]
+        start_char_offset = int(value.start.split("#")[1])
+        end_char_offset = int(value.end.split("#")[1])
+        row = self.data[self.index[col_name][block_ref]]
+        return getattr(row, field)[start_char_offset : end_char_offset + 1]

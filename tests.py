@@ -18,6 +18,11 @@ value = row.text
 
 assert value == "οὗτος ἦν ἐν ἀρχῇ πρὸς τὸν θεόν."
 
+# get text fragment from ref with character offsets
+text = nt_001.frag(bcv_id=Ref("640101#13-#17"))
+
+assert text == "λόγος"
+
 
 nt_002 = One(EXAMPLES / "nt_002.tsv")
 
