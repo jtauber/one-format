@@ -4,6 +4,9 @@ from collections import defaultdict, namedtuple
 class Ref:
     def __init__(self, value):
         self.raw = value
+        if "-" in value:
+            self.start, self.end = value.split("-")
+    
 
 
 def wrap(col_name, value):
@@ -40,3 +43,15 @@ class One:
         col_name, value = list(kwargs.items())[0]
         assert col_name.endswith("_id")  # for now
         return self.data[self.index[col_name][value]]
+
+    def rows(self, **kwargs):
+        assert len(kwargs) == 1  # for now
+        col_name, value = list(kwargs.items())[0]
+        assert col_name.endswith("_id")  # for now
+        assert isinstance(value, Ref)
+        if "-" in value.raw:
+            start = self.index[col_name][value.start]
+            end = self.index[col_name][value.end]
+            return self.data[start:end + 1]
+        else:
+            return [self.data[self.index[col_name][value.raw]]]

@@ -2,7 +2,7 @@
 
 from pathlib import Path
 
-from one import One
+from one import One, Ref
 
 
 EXAMPLES = Path("examples")
@@ -16,6 +16,10 @@ assert nt_001.get(bcv_id="640102").text == "οὗτος ἦν ἐν ἀρχῇ �
 nt_002 = One(EXAMPLES / "nt_002.tsv")
 
 assert nt_002.get(token_id="49063").text == "ἀρχῇ"
+
+assert " ".join(
+    row.text for row in nt_002.rows(token_id=Ref("49079-49085"))
+) == nt_001.get(bcv_id="640102").text
 
 
 nt_003 = One(EXAMPLES / "nt_003.tsv")
@@ -34,4 +38,4 @@ assert nt_005.get(token_id="49063").bcv_ref.raw == "640101#3-#6"
 
 nt_006 = One(EXAMPLES / "nt_006.tsv")
 
-assert nt_006.get(bcv_id="640102").token_ref.raw == "49078-49085"
+assert nt_006.get(bcv_id="640102").token_ref.raw == "49079-49085"
